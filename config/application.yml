@@ -1,0 +1,106 @@
+# Spring boot default config:
+#    https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+
+#Tomcat port
+server:
+  port: 8088
+  tomcat:
+    max-connections: 1000
+    max-threads: 500
+    min-spare-threads: 10
+
+multipart:
+  maxFileSize: 50000Mb
+  maxRequestSize: 5000MB
+
+# Logging
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trce
+      springframework:
+#        context: DEBUG
+#        web:
+#          servlet: DEBUG
+#      apache:
+#        commons:
+#          httpclient: DEBUG
+    com:
+      crossent:
+        demo:
+          portal: DEBUG
+
+spring:
+  profiles:
+    active: local
+#  mandatory-file-encoding: UTF-8
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+  session:
+    store-type: none
+  messages:
+    basename: messages-framework, messages-portal
+    cache-seconds: -1
+# data base
+  datasource:
+#    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    connection-test-query: SELECT 1
+    test-while-idle: true
+    test-on-borrow: true
+    validationQuery: SELECT 1
+    max-active: 100
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://172.27.0.3:3306/demodb?useSSL=false&useUnicode=true&autoReconnect=true&characterEncoding=utf8
+    username: demo
+    password: demo1234
+# JPA
+  jpa:
+    database: MYSQL
+    generate-ddl: true
+    show-sql: false
+    hibernate:
+# create create-drop update validate none
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
+        show_sql: false
+        use_sql_comments: true
+
+# web application
+lemon:
+  cors:
+    allowed-origins: http://localhost:8080,http://localhost:8443,http://localhost:8091
+    allowed-headers: X-CSRF-TOKEN,Content-Type,Accept,destination
+    file:
+      target : LOCAL
+      public : yes
+
+# portal
+portal:
+  apiServerHost: ""
+  api:
+    prefix: /api/portal
+  admin:
+    email: admin
+    password: admin!234
+    name: 관리자
+  file:
+    default:
+      uploadPath: /home/upload
+      downloadPath: http://localhost/xpert/upload
+    deploy:
+      uploadPath: /home/deploy
+      downloadPath: http://localhost/xpert/deploy
+#SWAGGER
+  swagger:
+    basePackage: com.demo.api.portal
+    basePath: /api/core/**,/api/comm/**,/api/portal/**
+

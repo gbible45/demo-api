@@ -1,0 +1,38 @@
+
+spring:
+  profiles:
+    active: local
+    include:
+  datasource:
+    url: jdbc:mysql://211.253.135.7:3306/demodb?useSSL=false&useUnicode=true&autoReconnect=true&characterEncoding=utf8
+    username: demo
+    password: demo!234
+
+# sql param print
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
+lemon:
+  cors:
+    allowed-origins: "*"
+
+# portal
+portal:
+  apiServerHost: ""
+# Admin User
+  admin:
+    email: admin
+    password: admin!234
+    name: 관리자
+  file:
+    default:
+      uploadPath: c:/workspace/upload
+      downloadPath: http://localhost/upload
+    deploy:
+      uploadPath: c:/workspace/deploy
+      downloadPath: http://localhost/deploy

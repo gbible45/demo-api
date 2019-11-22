@@ -1,0 +1,95 @@
+<configuration>
+    <!--configuration scan="true" scanPeriod="5 seconds"-->
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%8.8thread] [%logger{36}:%L] : %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="apiLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${DEPLOYAPI_LOGDIR}/demoApi.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${DEPLOYAPI_LOGDIR}/demoApi.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%8.8thread] [%logger{36}] : %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.crossent.demo" level="DEBUG" additivity="false">
+        <appender-ref ref="console" />
+        <appender-ref ref="apiLog" />
+    </logger>
+
+    <logger name="org.springframework" level="WARN" additivity="true">
+        <appender-ref ref="console" />
+        <appender-ref ref="apiLog" />
+    </logger>
+
+    <!--
+        <logger name="com.jayway" level="DEBUG" additivity="true">
+            &lt;!&ndash;<appender-ref ref="console" />&ndash;&gt;
+            <appender-ref ref="apiLog" />
+        </logger>
+
+        <logger name="reactor.ipc.netty" level="DEBUG" additivity="true">
+            &lt;!&ndash;<appender-ref ref="console" />&ndash;&gt;
+            <appender-ref ref="apiLog" />
+        </logger>
+
+        <logger name="org.hibernate.type" level="DEBUG"  additivity="false">
+            &lt;!&ndash;<appender-ref ref="console" />&ndash;&gt;
+            <appender-ref ref="apiLog" />
+        </logger>
+
+        <logger name="org.hibernate.type.BasicTypeRegistry" level="WARN"  additivity="false">
+            &lt;!&ndash;<appender-ref ref="console" />&ndash;&gt;
+            <appender-ref ref="apiLog" />
+        </logger>
+    -->
+
+    <!--
+        <logger name="org.apache.commons.httpclient" level="DEBUG" additivity="true">
+            <appender-ref ref="console" />
+            <appender-ref ref="apiLog" />
+        </logger>
+    -->
+
+    <!--
+        <logger name="org.hibernate.SQL" level="DEBUG"  additivity="false">
+            <appender-ref ref="console" />
+            <appender-ref ref="apiLog" />
+        </logger>
+    -->
+
+    <logger name="org.hibernate.type" level="TRACE"  additivity="false">
+        <appender-ref ref="console" />
+        <appender-ref ref="apiLog" />
+    </logger>
+
+    <!--
+        <logger name="org.hibernate.type.BasicTypeRegistry" level="WARN"  additivity="false">
+            <appender-ref ref="console" />
+            <appender-ref ref="apiLog" />
+        </logger>
+    -->
+
+
+    <!-- Default Logger -->
+    <logger name="defaultLogger" level="WARN" additivity="false">
+        <appender-ref ref="console" />
+        <appender-ref ref="apiLog" />
+    </logger>
+
+    <root level="WARN">
+        <appender-ref ref="console" />
+        <appender-ref ref="apiLog" />
+    </root>
+
+</configuration>

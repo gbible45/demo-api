@@ -1,0 +1,29 @@
+
+spring:
+  profiles:
+    active: dev
+    include:
+  datasource:
+    url: jdbc:mysql://172.27.0.3:3306/demodb?useSSL=false&useUnicode=true&autoReconnect=true&characterEncoding=utf8
+    username: demo
+    password: demo!234
+
+lemon:
+  cors:
+    allowed-origins: "*"
+
+# portal
+portal:
+# Admin User
+  apiServerHost: ""
+  admin:
+    email: admin
+    password: admin!234
+    name: 관리자
+  file:
+    default:
+      uploadPath: /home/upload
+      downloadPath: http://localhost/xpert/upload
+    deploy:
+      uploadPath: /home/deploy
+      downloadPath: http://localhost/xpert/deploy
